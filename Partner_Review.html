@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>සිරාම කතාව! 🥲</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans Sinhala', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 10px;
+    }
+
+    .box {
+      background: #1e293b;
+      padding: 25px 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      border: 1px solid #334155;
+    }
+
+    .pre-view-sec {
+      padding: 20px 0;
+    }
+
+    .pre-view-sec h2 {
+      color: #f8fafc;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .btn-view {
+      background: linear-gradient(45deg, #ff4d6d, #ff758c);
+      color: white;
+      border: none;
+      padding: 16px 25px;
+      width: 100%;
+      border-radius: 30px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+      transition: transform 0.2s;
+    }
+
+    .btn-view:active {
+      transform: scale(0.98);
+    }
+
+    .result-sec {
+      display: none;
+    }
+
+    h1 {
+      color: #f8fafc;
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .meme-container {
+      width: 100%;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .meme-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid #475569;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .btn-share {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      width: 100%;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);
+      transition: transform 0.2s, background 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-share:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="failAudio" src="faaaa.mp3" preload="auto"></audio>
+
+  <div class="box">
+    <div id="preViewSec" class="pre-view-sec">
+      <h2>ඔබේ අනාගත සහකාරිය/සහකාරයා සූදානම්! ✨</h2>
+      <button class="btn-view" onclick="revealPartner()">Review Your Partner 👁️</button>
+    </div>
+
+    <div id="resultSec" class="result-sec">
+      <h1>උඹේ ඔය කැත මූනට උඹට Love එකක් Set වෙන්නේ නෑ යකෝ 😂🥲</h1>
+
+      <div class="meme-container">
+        <img class="meme-img" src="Photo.png" alt="Funny Meme">
+      </div>
+
+      <button class="btn-share" onclick="shareToFriends()">
+        තව කෙනෙක්ව මෝඩයා කරන්න 📲
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const failAudio = document.getElementById('failAudio');
+
+    function revealPartner() {
+      // Audio එක Play කිරීම
+      failAudio.play().catch(e => console.log(e));
+
+      // View Button එක Hide කර Meme Result එක පෙන්වීම
+      document.getElementById('preViewSec').style.display = 'none';
+      document.getElementById('resultSec').style.display = 'block';
+    }
+
+    function shareToFriends() {
+      const DIRECT_AD_LINK = "https://noypolo.blogspot.com/p/redirect.html";
+      const homePageUrl = window.location.origin + "Find_Partner/Find_Partner_Home.html"; 
+      const shareMsg = "*මචං, මේකෙන් නමයි උපන්දිනයයි දුන්නම අනාගත සහකාරියගේ/සහකාරයාගේ Photo එක එක්කම විස්තර එනවා! බලපන් ඉක්මනට 😱❤️*\n\nමෙන්න Link එක: ";
+      const fullText = `${shareMsg} ${homePageUrl}`;
+      
+      // New Tab එකකින් WhatsApp open කරයි
+      window.open(`https://wa.me/?text=${encodeURIComponent(fullText)}`, '_blank');
+      
+      // පැරණි (Current) Tab එක Direct Ad Link එකට යවයි
+      window.location.href = DIRECT_AD_LINK;
+    }
+  </script>
+
+</body>
+</html>
