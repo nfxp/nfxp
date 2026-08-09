@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Your Future Partner</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 10px;
+    }
+
+    .box {
+      background: #ffffff;
+      padding: 30px 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .icon {
+      font-size: 50px;
+      margin-bottom: 10px;
+      animation: pulse 1.5s infinite;
+    }
+
+    h2 {
+      color: #d63384;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: #555;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      color: #333;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ffccd5;
+      border-radius: 10px;
+      outline: none;
+      font-size: 14.5px;
+      transition: 0.3s;
+    }
+
+    input:focus, select:focus {
+      border-color: #ff4d6d;
+    }
+
+    .btn-continue {
+      background: linear-gradient(45deg, #ff4d6d, #ff758c);
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      width: 100%;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+      transition: transform 0.2s, background 0.3s;
+      margin-top: 5px;
+    }
+
+    .btn-continue:active {
+      transform: scale(0.98);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <div class="icon">🔮❤️</div>
+    <h2>Your Future Partner</h2>
+    <p>See your future partner's picture and full details in 10 seconds based on your first initial and date of birth...</p>
+
+    <form id="partnerForm" onsubmit="redirectToAd(event)">
+      <div class="input-group">
+        <label for="userName">Your Name:</label>
+        <input type="text" id="userName" placeholder="Enter here..." required>
+      </div>
+
+      <div class="input-group">
+        <label for="userDob">Your Date of Birth:</label>
+        <input type="text" id="userDob" placeholder="Enter here..." required>
+      </div>
+
+      <div class="input-group">
+        <label for="gender">Whose details do you want?:</label>
+        <select id="gender">
+          <option value="female">Future Gf/Wife</option>
+          <option value="male">Future Bf/Husband</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-continue">See Your Partner ❤️</button>
+    </form>
+  </div>
+
+  <script>
+    function redirectToAd(event) {
+      event.preventDefault(); 
+      const DIRECT_AD_LINK = "https://omg10.com/4/11501067";
+      
+      // Opens Ad_Page.html in a new tab
+      window.open("https://noypolo.blogspot.com?from=partner_en&theme=partner_en", "_blank");
+      
+      // Redirects current tab to Direct Ad Link
+      window.location.href = DIRECT_AD_LINK;
+    }
+  </script>
+
+</body>
+</html>
