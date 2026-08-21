@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nose Touch Challenge - Trap</title>
+
+  <link rel="preload" as="image" href="scary.jpg">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans Sinhala', sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 10px;
+      overflow: hidden;
+    }
+
+    .box {
+      background: #0f172a;
+      padding: 25px 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      border: 1px solid #1e293b;
+    }
+
+    .trap-sec h2 {
+      color: #38bdf8;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .trap-sec p {
+      color: #94a3b8;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .nose-btn {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      border: 4px solid #fff;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.6);
+      touch-action: manipulation;
+    }
+
+    .nose-btn:active {
+      transform: scale(0.95);
+    }
+
+    .timer-text {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #cbd5e1;
+    }
+
+    .timer-num {
+      font-size: 38px;
+      font-weight: bold;
+      color: #facc15;
+      display: block;
+    }
+
+    .scare-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      z-index: 9999;
+    }
+
+    .scare-overlay img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .result-sec {
+      display: none;
+    }
+
+    .result-sec h1 {
+      color: #ef4444;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .result-sec p {
+      color: #cbd5e1;
+      font-size: 15px;
+      margin-bottom: 25px;
+    }
+
+    .btn-share {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 16px 20px;
+      width: 100%;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .btn-share:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MP3 Audio File එක කෙළින්ම HTML එකට සක්‍රීයව බැඳ ඇත -->
+  <audio id="screamSound" src="scream.mp3" preload="auto"></audio>
+
+  <div class="box">
+    <!-- TRAP SECTION -->
+    <div id="trapSec" class="trap-sec">
+      <h2>Phone එක මූණට ලං කරන්න! 🎯</h2>
+      <p>පහත Button එක මත <b>නහය තබා තත්පර 5ක්</b> ඔබාගෙන (Hold කරගෙන) ඉන්න.</p>
+
+      <div id="noseBtn" class="nose-btn" onmousedown="startHold(event)" onmouseup="stopHold()" ontouchstart="startHold(event)" ontouchend="stopHold()">
+        <span style="font-size: 35px;">👃</span>
+        <span style="font-size: 13px; font-weight: bold;">මෙතන ඔබන්න</span>
+      </div>
+
+      <div class="timer-text">
+        ඉතිරි කාලය:
+        <span id="timer" class="timer-num">5</span>
+      </div>
+    </div>
+
+    <!-- RESULT / SHARE SECTION -->
+    <div id="resultSec" class="result-sec">
+      <h1>😂 බය වුණා නේද? 👻</h1>
+      <p>ඔයාගේ යාලුවන්ටත් මේ Link එක යවලා එයාලව බය කරන්න!</p>
+
+      <button class="btn-share" onclick="shareToFriends()">
+        තව කෙනෙක්ව බය කරන්න 📲
+      </button>
+    </div>
+  </div>
+
+  <!-- JUMP SCARE OVERLAY -->
+  <div id="scareOverlay" class="scare-overlay">
+    <img src="scary.jpg" alt="Scare Ghost">
+  </div>
+
+  <script>
+    const screamSound = document.getElementById('screamSound');
+    
+    // Image Preloader
+    const imgPreloader = new Image();
+    imgPreloader.src = "scary.jpg";
+
+    let holdTimer = null;
+    let timeLeft = 5;
+    let isUnlocked = false;
+
+    // Mobile Browser restriction එක ලිහිල් කිරීමට First Touch එකේදීම Audio එක Instant Unlock කිරීම
+    function unlockAudio() {
+      if (!isUnlocked) {
+        screamSound.volume = 0.1;
+        let p = screamSound.play();
+        if (p !== undefined) {
+          p.then(() => {
+            screamSound.pause();
+            screamSound.currentTime = 0;
+            screamSound.volume = 1.0;
+            isUnlocked = true;
+          }).catch(e => console.log(e));
+        }
+      }
+    }
+
+    function startHold(e) {
+      e.preventDefault();
+      
+      // User touch කළ සැනින් Audio Unlock සිදුවේ
+      unlockAudio();
+
+      timeLeft = 5;
+      document.getElementById('timer').innerText = timeLeft;
+
+      holdTimer = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timer').innerText = timeLeft;
+
+        // තත්පර 2දී Scare Trigger වේ
+        if (timeLeft === 2) {
+          triggerJumpScare();
+        }
+      }, 1000);
+    }
+
+    function stopHold() {
+      clearInterval(holdTimer);
+      timeLeft = 5;
+      document.getElementById('timer').innerText = "5";
+    }
+
+    function triggerJumpScare() {
+      clearInterval(holdTimer);
+
+      // Sound එක 100% Volume එකෙන් Instant Play වේ
+      screamSound.volume = 1.0;
+      screamSound.currentTime = 0;
+      screamSound.play().catch(e => console.log(e));
+
+      // Image Overlay එක Display වේ
+      document.getElementById('scareOverlay').style.display = 'block';
+
+      // තත්පර 2.5කට පසු Share Section එකට මාරු වේ
+      setTimeout(() => {
+        document.getElementById('scareOverlay').style.display = 'none';
+        document.getElementById('trapSec').style.display = 'none';
+        document.getElementById('resultSec').style.display = 'block';
+      }, 2500);
+    }
+
+    function shareToFriends() {
+      const DIRECT_AD_LINK = "https://omg10.com/4/11501067";
+      const homePageUrl = window.location.href.replace("trap.html", "index.html"); 
+      const shareMsg = "*මචං, ඔයාට පුළුවන්ද Phone එකේ මැද නහයෙන් touch කරන්න? 99% කටම බෑ! Try කරලා බලන්න 😱👃*\n\nමෙන්න Link එක: ";
+      const fullText = `${shareMsg} ${homePageUrl}`;
+      
+      window.open(`https://wa.me/?text=${encodeURIComponent(fullText)}`, '_blank');
+      window.location.href = DIRECT_AD_LINK;
+    }
+  </script>
+
+</body>
+</html>
