@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>සුබ ගුරු දිනයක් වේවා! | Teacher's Day Greetings</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow-x: hidden; scroll-behavior: smooth; }
+
+body {
+  background: linear-gradient(180deg, #bcd4e6 0%, #ffffff 100%);
+  color: #333;
+  font-family: 'Noto Sans Sinhala', Arial, sans-serif;
+}
+
+.wrap { max-width: 420px; margin: 0 auto; position: relative; z-index: 10; }
+
+.main-icon { font-size: 50px; margin-bottom: 12px; display: inline-block; animation: glow 2s ease-in-out infinite alternate; }
+@keyframes glow { from {text-shadow: 0 0 10px #007bff;} to {text-shadow: 0 0 20px #0056b3, 0 0 30px #002752;} }
+
+.falling-item {
+  position: fixed;
+  top: -10%;
+  color: #0056b3;
+  font-size: 20px;
+  opacity: 0.25;
+  z-index: 1;
+  pointer-events: none;
+  animation-name: fall, sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes fall { 0% { top: -10%; } 100% { top: 110%; } }
+@keyframes sway { 0% { transform: translateX(0) rotate(0deg); } 50% { transform: translateX(50px) rotate(180deg); } 100% { transform: translateX(0) rotate(360deg); } }  
+  
+/* Full Screen Card */
+.full-card {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+}
+.card {
+  background-image: linear-gradient(rgba(0,39,82,0.75), rgba(0,20,42,0.85)), url('Teacher-BG.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px solid #ffffff;
+  border-radius: 20px;
+  padding: 30px 24px 20px 24px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0,56,179,0.2);
+  width: 100%;
+  position: relative;
+  color: #fff;
+}
+
+h1 { font-size: 26px; color: #ffffff; margin-bottom: 16px; font-weight: 700; letter-spacing: 0.5px; }
+.wish-text {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12); 
+  padding: 20px;
+  border-radius: 12px;
+  margin: 16px 0;
+  min-height: 100px;
+  border: 1px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(5px);
+}
+.from { font-size: 17px; color: #cbdcf7; margin-bottom: 25px; font-weight: bold;}
+  
+.btn {
+  width: 100%;
+  background: linear-gradient(90deg, #0056b3, #007bff);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 24px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform 0.2s;
+}
+.btn:active { transform: scale(0.98); }
+
+.scroll-hint {
+  position: relative;
+  font-size: 14px;
+  color: #ffffff;
+  animation: bounce 2s infinite;
+  text-align: center;
+  margin: 15px auto 0 auto;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+}
+@keyframes bounce {
+ 0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+ 40% { transform: translateY(-6px); }
+ 60% { transform: translateY(-3px); }
+}
+
+/* Maker Section */
+.maker-section {
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+.maker-card {
+  background: #fff;
+  border: 2px solid #bcd4e6;
+  border-radius: 20px;
+  padding: 24px;
+  text-align: center;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+.maker-title { font-size: 20px; color: #0056b3; margin-bottom: 20px; font-weight: bold; }
+.input-group { margin-bottom: 15px; }
+.input-wrap { position: relative; }
+input {
+  width: 100%;
+  background: #f4f8fb;
+  border: 1px solid #bce;
+  border-radius: 12px;
+  padding: 14px 45px 14px 14px;
+  color: #333;
+  font-size: 16px;
+  font-family: 'Noto Sans Sinhala', sans-serif;
+  outline: none;
+}
+input:focus { border-color: #0056b3; background: #fff; }
+
+.ai-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.ai-btn svg { width: 18px; height: 18px; fill: #fff; }
+</style>
+</head>
+<body>
+
+<div id="fallingContainer"></div>
+
+<div class="wrap">
+  <section class="full-card" id="section1">
+    <div class="card">
+      <div class="main-icon">📚🎓</div>
+      <h1>ලෝක ගුරු දිනය</h1>
+      <div class="wish-text" id="wishText"></div>
+      <div class="from" id="fromText"></div>
+
+      <div class="scroll-hint">
+        ඔබත් ගුරුවරයෙකුට සුබ පතන්න ⬇
+      </div>
+    </div>
+  </section>
+
+  <section class="maker-section" id="section2">
+    <div class="maker-card">
+      <div class="maker-title">🖊️ ඔබේ සුබපැතුම හදන්න</div>
+      <div class="input-group">
+        <input type="text" id="nameInput" placeholder="ඔබේ නම" maxlength="50">
+      </div>
+      <div class="input-wrap">
+        <input type="text" id="msgInput" placeholder="ගුරු දින පණිවිඩය" maxlength="80">
+        <button type="button" class="ai-btn" onclick="generateWish()" title="වෙනස් පණිවිඩයක්">
+          <svg viewBox="0 0 24 24">
+            <path d="M12,2L15.09,8.26L22,9.27L17,14.14L18.18,21.02L12,17.77L5.82,21.02L7,14.14L2,9.27L8.91,8.26L12,2Z"/>
+          </svg>
+        </button>
+      </div>
+      <br>
+      <button class="btn" onclick="goToAd('make')">Whatsapp හරහා යවන්න</button>
+    </div>
+  </section>
+</div>
+
+<script>
+const defaultMsg = "අපගේ ජීවිත ආලෝකවත් කළ ලොවක් වටිනා සියලුම ගුරුවරුන්ට සුභ ගුරු දිනයක් වේවා!";
+const defaultFrom = "ඔබේ ශිෂ්‍යයෙක්";
+const MONETAG_LINK = "https://www.google.com"; // ඔබේ Monetag Direct Link එක
+
+const teachersWishes = [
+  "අපගේ ජීවිත ආලෝකවත් කළ සියලුම ගුරුවරුන්ට සුභ ගුරු දිනයක් වේවා! 📚",
+  "ඔබ දුන් සිප්සතර අපේ අනාගතයයි. ඔබට නිදුක් නිරෝගී සුවය ලැබේවා! ❤",
+  "හොඳ නරක කියා දී අපව යහමගට ගත් මගේ ආදරණීය ඔබට සුබ ගුරු දිනයක්!",
+  "විශය පමණක් නොව ජීවිතයේ වටිනාකම් ද කියා දුන් ඔබට ස්තූතියි. 🌟",
+  "ලොව උතුම්ම රැකියාව ගුරුකමයි. සියලුම ගුරුවරුන්ට අපේ ප්‍රණාමය!",
+  "මගේ දක්ෂතා හඳුනාගෙන මා දිරිමත් කළ මගේ ප්‍රියතම ගුරුවරයාට සුබ පතමි!",
+  "දැනුම නමැති සාගරයෙන් අපව එතෙර කළ නිහඬ මෙහෙවරට උත්තමාචාරය! 🙏",
+  "ඔබ වැනි ගුරුවරුන් ලොවට සම්පතකි. දීර්ඝායුෂ ප්‍රාර්ථනා කරමි ! 🎓",
+  "අකුරු කළ මෙහෙවරට දෙගුරුන් හා සමානව වඳිමි. සුබ ගුරු දිනයක් වේවා!",
+  "හැමදාමත් අපේ හදවත් තුළ ජීවත් වන ආදරණීය ගුරුවරුන්ට මගේ ප්‍රණාමය!"
+];
+let wishIndex = 0;
+
+function getParams() {
+  const params = new URLSearchParams(window.location.search);
+  return { msg: params.get('msg') || defaultMsg, from: params.get('from') || defaultFrom };
+}
+
+function loadCard() {
+  const {msg, from} = getParams();
+  document.getElementById('wishText').textContent = msg;
+  document.getElementById('fromText').textContent = "- " + from;
+  createFallingItems(); 
+}
+
+function createFallingItems() {
+  const container = document.getElementById('fallingContainer');
+  const items = ['📚', '✏️', '🌟', '🎓', '💙'];
+  const itemCount = 25;
+  for (let i = 0; i < itemCount; i++) {
+    const item = document.createElement('div');
+    item.classList.add('falling-item');
+    item.textContent = items[Math.floor(Math.random() * items.length)];
+    item.style.left = Math.random() * 100 + 'vw';
+    item.style.fontSize = Math.random() * 15 + 15 + 'px';
+    item.style.animationDuration = Math.random() * 5 + 8 + 's';
+    item.style.animationDelay = Math.random() * 5 + 's';
+    container.appendChild(item);
+  }
+}
+
+function generateWish() {
+  const msgInput = document.getElementById('msgInput');
+  msgInput.value = teachersWishes[wishIndex];
+  wishIndex = (wishIndex + 1) % teachersWishes.length;
+  msgInput.focus();
+}
+
+function goToAd(type) {
+  let finalUrl = window.location.href;
+  if(type === 'make') {
+    const name = document.getElementById('nameInput').value.trim() || defaultFrom;
+    const msg = document.getElementById('msgInput').value.trim() || defaultMsg;
+    finalUrl = window.location.origin + window.location.pathname + `?msg=${encodeURIComponent(msg)}&from=${encodeURIComponent(name)}`;
+  }
+
+  // 1. Direct Ad Link එක New Tab එකකින් Open කිරීම
+  window.open(MONETAG_LINK, '_blank');
+
+  // 2. Theme එකයි, 'wish' Type එකයි Ad Page එකට Pass කර Redirect කිරීම
+  sessionStorage.setItem("pageType", "wish");
+  const adPageUrl = `adpage.html?from=wish&theme=wish&share=${encodeURIComponent(finalUrl)}`;
+  
+  window.location.href = adPageUrl;
+}
+
+window.onload = loadCard;
+</script>
+</body>
+</html>
