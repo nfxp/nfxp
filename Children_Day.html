@@ -179,7 +179,7 @@ input:focus { border-color: #ff0055; background: #131b2e; }
 <div id="fallingContainer"></div>
 
 <div class="wrap">
-  <!-- 1. Shared Wish View Section -->
+  <!-- 1. Review Card Section (Shared Wish View) -->
   <section class="full-card" id="section1">
     <div class="card">
       <div class="main-icon">🔥👑</div>
@@ -193,7 +193,7 @@ input:focus { border-color: #ff0055; background: #131b2e; }
     </div>
   </section>
 
-  <!-- 2. Generator Form Section -->
+  <!-- 2. Form Section (New Wish Maker) -->
   <section class="maker-section" id="section2">
     <div class="maker-card">
       <div class="maker-title">🖊️ ඔබේ සුබපැතුම හදන්න</div>
@@ -277,8 +277,8 @@ function redirectToAd(event) {
   const name = document.getElementById('nameInput').value.trim() || defaultFrom;
   const msg = document.getElementById('msgInput').value.trim() || defaultMsg;
   
-  // Blogspot Ad Countdown Page එකට action=share සමග Redirect කරයි
-  const bloggerShareTarget = `${BLOGGER_URL}?from=children&theme=children&action=share&msg=${encodeURIComponent(msg)}&fromName=${encodeURIComponent(name)}`;
+  // page=Children_Day.html Parameter එක Blogger එකට යවයි
+  const bloggerShareTarget = `${BLOGGER_URL}?from=wish&theme=wish&page=Children_Day.html&action=share&msg=${encodeURIComponent(msg)}&fromName=${encodeURIComponent(name)}`;
   
   window.location.href = bloggerShareTarget;
 }
