@@ -237,12 +237,15 @@ let wishIndex = 0;
 function getParams() {
   const params = new URLSearchParams(window.location.search);
   let msg = params.get('msg');
-  let from = params.get('from');
+  let from = params.get('from') || params.get('fromName');
   const dParam = params.get('d');
 
   if (dParam) {
     try {
-      const decoded = JSON.parse(decodeURIComponent(escape(atob(dParam))));
+      const jsonString = decodeURIComponent(atob(dParam).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      const decoded = JSON.parse(jsonString);
       if (decoded.m) msg = decoded.m;
       if (decoded.f) from = decoded.f;
     } catch(e) {
@@ -294,11 +297,14 @@ function redirectToAd(event) {
   const name = document.getElementById('nameInput').value.trim() || defaultFrom;
   const msg = document.getElementById('msgInput').value.trim() || defaultMsg;
   
-  // Data ටික Base64 Payload එකක් බවට පත් කිරීම
+  // UTF-8 Safe Base64 Encoding for Sinhala Text
   const payloadObj = { m: msg, f: name };
-  const encodedD = btoa(unescape(encodeURIComponent(JSON.stringify(payloadObj))));
+  const jsonStr = JSON.stringify(payloadObj);
+  const encodedD = btoa(encodeURIComponent(jsonStr).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+    return String.fromCharCode('0x' + p1);
+  }));
 
-  const bloggerShareTarget = `${BLOGGER_URL}?from=wish&page=Children_Day.html&action=share&d=${encodedD}`;
+  const bloggerShareTarget = `${BLOGGER_URL}?from=w&p=Children_Day.html&action=share&d=${encodedD}`;
   
   window.location.href = bloggerShareTarget;
 }
