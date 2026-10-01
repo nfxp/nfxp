@@ -236,7 +236,24 @@ let wishIndex = 0;
 
 function getParams() {
   const params = new URLSearchParams(window.location.search);
-  return { msg: params.get('msg') || defaultMsg, from: params.get('from') || defaultFrom };
+  let msg = params.get('msg');
+  let from = params.get('from');
+  const dParam = params.get('d');
+
+  if (dParam) {
+    try {
+      const decoded = JSON.parse(decodeURIComponent(escape(atob(dParam))));
+      if (decoded.m) msg = decoded.m;
+      if (decoded.f) from = decoded.f;
+    } catch(e) {
+      console.error("Payload parse error", e);
+    }
+  }
+
+  return { 
+    msg: msg || defaultMsg, 
+    from: from || defaultFrom 
+  };
 }
 
 function loadCard() {
@@ -272,13 +289,16 @@ function generateWish() {
 function redirectToAd(event) {
   event.preventDefault(); 
   
-  const BLOGGER_URL = "https://noypolo.blogspot.com"; // Blogspot URL එක
+  const BLOGGER_URL = "https://noypolo.blogspot.com"; 
   
   const name = document.getElementById('nameInput').value.trim() || defaultFrom;
   const msg = document.getElementById('msgInput').value.trim() || defaultMsg;
   
-  // page=Children_Day.html Parameter එක Blogger එකට යවයි
-  const bloggerShareTarget = `${BLOGGER_URL}?from=wish&theme=wish&page=Children_Day.html&action=share&msg=${encodeURIComponent(msg)}&fromName=${encodeURIComponent(name)}`;
+  // Data ටික Base64 Payload එකක් බවට පත් කිරීම
+  const payloadObj = { m: msg, f: name };
+  const encodedD = btoa(unescape(encodeURIComponent(JSON.stringify(payloadObj))));
+
+  const bloggerShareTarget = `${BLOGGER_URL}?from=wish&page=Children_Day.html&action=share&d=${encodedD}`;
   
   window.location.href = bloggerShareTarget;
 }
